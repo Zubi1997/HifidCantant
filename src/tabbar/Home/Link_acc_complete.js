@@ -14,7 +14,7 @@ export default function Profile({title,navigation}) {
     const [show_pass, set_show_pass] = useState(false);
 
     const link_done=async()=>{
-        // AsyncStorage.setItem('link_account',JSON.stringify(false));
+        AsyncStorage.setItem('link_account',JSON.stringify(true));
         navigation.navigate('Bottomtabbar')
     }
 

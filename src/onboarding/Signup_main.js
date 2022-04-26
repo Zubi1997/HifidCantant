@@ -31,11 +31,11 @@ export default function Signup({title,navigation}) {
             <Email_logo />
             <Text style={styles.submit_txt}>Get started</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={()=>navigation.navigate('Profile')} style={styles.submit}>
+          <TouchableOpacity onPress={()=>navigation.navigate('Profile_auth')} style={styles.submit}>
             <Google_logo />
             <Text style={styles.submit_txt}>Get started</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={()=>navigation.navigate('Profile')} style={styles.submit}>
+          <TouchableOpacity onPress={()=>navigation.navigate('Profile_auth')} style={styles.submit}>
             <Apple_logo />
             <Text style={styles.submit_txt}>Get started</Text>
           </TouchableOpacity>

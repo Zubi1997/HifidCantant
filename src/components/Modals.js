@@ -9,7 +9,7 @@ return(
         <View style={styles.modalView}>
         <View style={styles.modal_logo_view}>
             <Image style={styles.modal_logo} source={require('../../assets/png/home_modal_logo.png')}/>
-            <Text style={[styles.blacktxt20,{marginTop:10}]}>Let’s get you setup</Text>
+            <Text style={[styles.blacktxt20,{marginTop:10}]}>Let{'’'}s get you setup</Text>
             <Text style={styles.greytxt16}>Link your bank account and get financial insights about your business</Text>
         </View>
         <View style={{justifyContent:'space-between',}}>

@@ -5,7 +5,12 @@ import Entypo from 'react-native-vector-icons/Entypo'
 import colors from '../../../assets/colors';
 import Pie from 'react-native-pie'
 import {BarChart} from 'react-native-charts-wrapper';
-import { G } from 'react-native-svg';
+import {
+  Menu,
+  MenuOptions,
+  MenuOption,
+  MenuTrigger,
+} from 'react-native-popup-menu';
 var windowWidth = Dimensions.get('window').width
 var windowHeight=Dimensions.get('window').height
 
@@ -16,7 +21,8 @@ export default function Pre_orders({route,navigation}) {
 
     const [manual_time, set_manual_time] = useState('');
     const toastRef = useRef();
-
+    const [cashin_monthly, set_cashin_monthly] = useState('2022');
+    const [cashin_this_month, set_cashin_this_month] = useState('Feb');
 
     const data_array = [
       {
@@ -122,9 +128,22 @@ export default function Pre_orders({route,navigation}) {
                 <Text style={styles.headtxt_1}>Monthly Cash In</Text>
                 <Text style={styles.headtxt_2}>N 100,000<Text style={{fontSize:12,color:colors.cashflow_txt,}}>   Avg</Text></Text>
             </View>
-            <View>
-                <Text style={{color:'black'}}>2022</Text>
-            </View>
+            <Menu >
+                <MenuTrigger >
+                    <View style={{height:40,flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
+                      <Text style={{color:'black'}}>{cashin_monthly}</Text>
+                      <Entypo name={'chevron-small-down'} style={{alignSelf:'center'}} size={30} color={'#4F4F4F'} />
+                    </View>
+                </MenuTrigger>
+                <MenuOptions customStyles={optionsStyles }>
+                  <View >
+                  <MenuOption onSelect={() => set_cashin_monthly(`2019`)} text='2019' />
+                  <MenuOption onSelect={() => set_cashin_monthly(`2020`)} text='2020' />
+                  <MenuOption onSelect={() => set_cashin_monthly(`2021`)} text='2021' />
+                  <MenuOption onSelect={() => set_cashin_monthly(`2022`)} text='2022' />
+                  </View>
+                </MenuOptions>
+              </Menu>
 
         </View>
         <View style={styles.container_chart}>
@@ -154,9 +173,22 @@ export default function Pre_orders({route,navigation}) {
                 <Text style={styles.headtxt_1}>This Month</Text>
                 <Text style={styles.headtxt_2}>N 100,000</Text>
             </View>
-            <View>
-                <Text style={{color:'black'}}>Feb</Text>
-            </View>
+            <Menu >
+                <MenuTrigger >
+                    <View style={{height:40,flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
+                      <Text style={{color:'black'}}>{cashin_this_month}</Text>
+                      <Entypo name={'chevron-small-down'} style={{alignSelf:'center'}} size={30} color={'#4F4F4F'} />
+                    </View>
+                </MenuTrigger>
+                <MenuOptions customStyles={optionsStyles }>
+                  <View >
+                  <MenuOption onSelect={() => set_cashin_this_month(`Feb`)} text='Feb' />
+                  <MenuOption onSelect={() => set_cashin_this_month(`Mar`)} text='Mar' />
+                  <MenuOption onSelect={() => set_cashin_this_month(`Apr`)} text='Apr' />
+                  <MenuOption onSelect={() => set_cashin_this_month(`May`)} text='May' />
+                  </View>
+                </MenuOptions>
+              </Menu>
 
         </View>
         <View style={styles.pie_view}>
@@ -278,3 +310,29 @@ const styles = StyleSheet.create({
 });
 
 
+
+const optionsStyles = {
+  optionsContainer: {
+    // backgroundColor: 'green',
+    width:120,
+    alignItems:'center',
+  },
+  optionsWrapper: {
+    // backgroundColor: 'purple',
+    alignItems:'center',
+    width:120
+  },
+  optionWrapper: {
+    // backgroundColor: 'yellow',
+    alignItems:'center',
+    width:120,
+    paddingVertical:7
+  },
+  optionTouchable: {
+    // underlayColor: 'gold',
+    // activeOpacity: 70,
+  },
+  optionText: {
+    color: 'black',
+  },
+};

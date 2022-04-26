@@ -35,10 +35,10 @@ console.log(windowWidth/30)
             <Text style={styles.head}>Email</Text>
             <Text style={[styles.head,{color:'#626262',fontSize:18}]}>We’ve sent confirmation to your email</Text>
           </View>
-          <TouchableOpacity onPress={()=>navigation.navigate('Profile')} style={styles.btn}>
+          <TouchableOpacity onPress={()=>navigation.navigate('Profile_auth')} style={styles.btn}>
                 <Text style={styles.btn_txt}>{email}</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.change_email}>
+          <TouchableOpacity onPress={()=>navigation.goBack()} style={styles.change_email}>
             <Text style={styles.change_email_txt}>Change Email</Text>
           </TouchableOpacity>
        

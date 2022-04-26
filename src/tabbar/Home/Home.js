@@ -10,6 +10,12 @@ import { Add_cashout_logo, Arrows69, Categorized_logo, UNcategorized_logo, Yello
 import { ProgressBar, Colors } from 'react-native-paper';
 import { Email_svg } from '../../../assets/Svgs_business';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {
+  Menu,
+  MenuOptions,
+  MenuOption,
+  MenuTrigger,
+} from 'react-native-popup-menu';
 
 var windowWidth = Dimensions.get('window').width
 var windowHeight=Dimensions.get('window').height
@@ -19,6 +25,7 @@ export default function Home({title,navigation}) {
   const [selectedValue, setSelectedValue] = useState("Today");
   const [modal_visible, set_modal_visible] = useState(false);
   const [modal_visible_add_trans, set_modal_visible_add_trans] = useState(false);
+  const [transaction_setup, set_transaction_setup] = useState(false);
 
 
   const toastRef = useRef();
@@ -37,6 +44,7 @@ export default function Home({title,navigation}) {
           let link = await AsyncStorage.getItem("link_account");
           let parsedlink = JSON.parse(link); 
           if(parsedlink=='true' || parsedlink==true){
+            set_transaction_setup(true)
             set_modal_visible(false)
           }
           else{
@@ -59,7 +67,7 @@ export default function Home({title,navigation}) {
           <View style={styles.modalView}>
             <View style={styles.modal_logo_view}>
               <Image style={styles.modal_logo} source={require('../../../assets/png/home_modal_logo.png')}/>
-              <Text style={[styles.blacktxt20,{marginTop:10}]}>Let’s get you setup</Text>
+              <Text style={[styles.blacktxt20,{marginTop:10}]}>Let{'’'}s get you setup</Text>
               <Text style={styles.greytxt16}>Link your bank account and get financial insights about your business</Text>
             </View>
             <View style={{justifyContent:'space-between',}}>
@@ -121,6 +129,7 @@ export default function Home({title,navigation}) {
   return (
         
       <ScrollView style={styles.container}>
+
         <View style={styles.head}>
           <Text style={styles.headtxt1}>Your Balance</Text>
           <View style={styles.head2}>
@@ -165,6 +174,20 @@ export default function Home({title,navigation}) {
             </View>
           </View>
         </View>
+          <Menu >
+            <MenuTrigger customStyles={{backgroundColor:'grey'}}>
+                <View style={{height:40,width:200,alignItems:'center',justifyContent:'center'}}>
+                  <Text>hvjhbccdcjh </Text>
+                </View>
+            </MenuTrigger>
+            <MenuOptions  customStyles={{backgroundColor:'red'}}>
+              <MenuOption onSelect={() => alert(`Save`)} text='Save' />
+              <MenuOption onSelect={() => alert(`Delete`)} >
+                <Text style={{color: 'red'}}>Delete</Text>
+              </MenuOption>
+              <MenuOption onSelect={() => alert(`Not called`)} disabled={true} text='Disabled' />
+            </MenuOptions>
+          </Menu>
 
         <View style={styles.progess_view}>
           <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
@@ -173,30 +196,56 @@ export default function Home({title,navigation}) {
           </View>
           <ProgressBar  progress={0.1} color={colors.nextbtn} style={styles.progess_bar}/>
         </View>
-        <Button_dark onpress={()=> {set_modal_visible(false),navigation.navigate('Link_acc_desc')}} Title1='Link your bank account' Title2='none' upper_margin={20}  fontsize={18}/>
+        {transaction_setup==true?
 
-        <View style={{marginBottom:20}}>
-          <View style={styles.categorized}>
-            <View style={styles.categorized_logo_bg}>
-              <Categorized_logo />
-            </View>
-            <View style={{flex:1}}>
-              <Text style={styles.categorized_txt1}>Categorised</Text>
-              <Text style={styles.categorized_txt2}>5 Transactions</Text>
-            </View>
-              <Entypo name={'chevron-small-right'} style={{alignSelf:'center'}} size={30} color={'#4F4F4F'} />
+          <View style={{marginBottom:20}}>
+            <TouchableOpacity onPress={()=>{
+              navigation.push('Bottomtabbar', {
+                screen: 'Transactions', 
+                params: {
+                  screen: 'Transactionss',
+                  params: {
+                    cat_type:'categorized'
+                    // title: 'Your custom title for Select screen here ...',
+                  },
+                },
+              });
+            }} style={styles.categorized}>
+              <View style={styles.categorized_logo_bg}>
+                <Categorized_logo />
+              </View>
+              <View style={{flex:1}}>
+                <Text style={styles.categorized_txt1}>Categorised</Text>
+                <Text style={styles.categorized_txt2}>5 Transactions</Text>
+              </View>
+                <Entypo name={'chevron-small-right'} style={{alignSelf:'center'}} size={30} color={'#4F4F4F'} />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={()=>{
+              navigation.push('Bottomtabbar', {
+                screen: 'Transactions', 
+                params: {
+                  screen: 'Transactionss',
+                  params: {
+                    cat_type:'uncategorized'
+                    // title: 'Your custom title for Select screen here ...',
+                  },
+                },
+              });
+            }} style={styles.categorized}>
+              <View style={[styles.categorized_logo_bg,{backgroundColor:'#fbe9e9'}]}>
+                <UNcategorized_logo />
+              </View>
+              <View style={{flex:1}}>
+                <Text style={[styles.categorized_txt1,{color:colors.red_txt}]}>Uncategorised</Text>
+                <Text style={[styles.categorized_txt2,{color:colors.red_txt}]}>5 Transactions</Text>
+              </View>
+                <Entypo name={'chevron-small-right'} style={{alignSelf:'center'}} size={30} color={'#4F4F4F'} />
+            </TouchableOpacity>
           </View>
-          <View style={styles.categorized}>
-            <View style={[styles.categorized_logo_bg,{backgroundColor:'#fbe9e9'}]}>
-              <UNcategorized_logo />
-            </View>
-            <View style={{flex:1}}>
-              <Text style={[styles.categorized_txt1,{color:colors.red_txt}]}>Uncategorised</Text>
-              <Text style={[styles.categorized_txt2,{color:colors.red_txt}]}>5 Transactions</Text>
-            </View>
-              <Entypo name={'chevron-small-right'} style={{alignSelf:'center'}} size={30} color={'#4F4F4F'} />
-          </View>
-        </View>
+          :
+          <Button_dark onpress={()=> {set_modal_visible(false),navigation.navigate('Link_acc_desc')}} Title1='Link your bank account' Title2='none' upper_margin={20}  fontsize={18}/>
+        }
+
 
 
         <Modal

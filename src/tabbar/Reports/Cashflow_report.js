@@ -1,63 +1,17 @@
-// import React from 'react'
-// import { BarChart, Grid } from 'react-native-svg-charts'
-
-// class GroupedBarChartExample extends React.PureComponent {
-
-//     render() {
-
-//         const data1 = [ 14, -1, 100, -95, -94, -24, -8, 85, -91, 35, -53, 53, -78, 66, 96, 33, -26, -32, 73, 8 ]
-//             .map((value) => ({ value }))
-//         const data2 = [ 24, 28, 93, 77, -42, -62, 52, -87, 21, 53, -78, -62, -72, -6, 89, -70, -94, 10, 86, 84 ]
-//             .map((value) => ({ value }))
-
-//         const barData = [
-//             {
-//                 data: data1,
-//                 svg: {
-//                     fill: 'red',
-//                 },
-//             },
-//             {
-//                 data: data2,
-//                 svg: {
-//                     fill: 'orange',
-//                 },
-//             },
-//         ]
-
-//         return (
-//             <BarChart
-//                 style={ { height: 200,width:300 } }
-//                 data={ barData }
-//                 yAccessor={({ item }) => item.value}
-//                 contentInset={ { top: 30, bottom: 30 } }
-//                 { ...this.props }
-//             >
-//                 <Grid/>
-//             </BarChart>
-//         )
-//     }
-
-// }
-
-// export default GroupedBarChartExample
-
 
 import React, {Component,useState,useRef} from 'react';
 import { StyleSheet, Text, View, TouchableOpacity,Dimensions,SafeAreaView ,FlatList, ScrollView,processColor} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Entypo from 'react-native-vector-icons/Entypo'
-// import {
-//     LineChart,
-//     BarChart,
-//     PieChart,
-//     ProgressChart,
-//     ContributionGraph,
-//     StackedBarChart
-//   } from "react-native-chart-kit";
 import colors from '../../../assets/colors';
 import {BarChart} from 'react-native-charts-wrapper';
-import { G } from 'react-native-svg';
+import {
+  Menu,
+  MenuOptions,
+  MenuOption,
+  MenuTrigger,
+} from 'react-native-popup-menu';
+
 var windowWidth = Dimensions.get('window').width
 var windowHeight=Dimensions.get('window').height
 
@@ -66,7 +20,7 @@ const GREEN = processColor('#53B683');
 const RED = processColor('#EB4442');
 export default function Pre_orders({route,navigation}) {
 
-    const [manual_time, set_manual_time] = useState('');
+    const [cash_flow_year, set_cash_flow_year] = useState('2022');
     const toastRef = useRef();
     const [data, set_data] = useState({
         dataSets: [{
@@ -122,9 +76,22 @@ export default function Pre_orders({route,navigation}) {
                 <Text style={styles.headtxt_1}>Your Cash Flow</Text>
                 <Text style={styles.headtxt_2}>N 100,000<Text style={{fontSize:12,color:colors.cashflow_txt,}}>   Avg</Text></Text>
             </View>
-            <View>
-                <Text style={{color:'black'}}>2022</Text>
-            </View>
+              <Menu >
+                <MenuTrigger >
+                    <View style={{height:40,flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
+                      <Text style={{color:'black'}}>{cash_flow_year}</Text>
+                      <Entypo name={'chevron-small-down'} style={{alignSelf:'center'}} size={30} color={'#4F4F4F'} />
+                    </View>
+                </MenuTrigger>
+                <MenuOptions customStyles={optionsStyles }>
+                  <View >
+                  <MenuOption onSelect={() => set_cash_flow_year(`2019`)} text='2019' />
+                  <MenuOption onSelect={() => set_cash_flow_year(`2020`)} text='2020' />
+                  <MenuOption onSelect={() => set_cash_flow_year(`2021`)} text='2021' />
+                  <MenuOption onSelect={() => set_cash_flow_year(`2022`)} text='2022' />
+                  </View>
+                </MenuOptions>
+              </Menu>
 
         </View>
         <View style={styles.container_chart}>
@@ -224,4 +191,28 @@ const styles = StyleSheet.create({
 
 });
 
-
+const optionsStyles = {
+  optionsContainer: {
+    // backgroundColor: 'green',
+    width:120,
+    alignItems:'center',
+  },
+  optionsWrapper: {
+    // backgroundColor: 'purple',
+    alignItems:'center',
+    width:120
+  },
+  optionWrapper: {
+    // backgroundColor: 'yellow',
+    alignItems:'center',
+    width:120,
+    paddingVertical:7
+  },
+  optionTouchable: {
+    // underlayColor: 'gold',
+    // activeOpacity: 70,
+  },
+  optionText: {
+    color: 'black',
+  },
+};

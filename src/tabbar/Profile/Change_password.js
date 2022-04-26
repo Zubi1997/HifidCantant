@@ -84,7 +84,7 @@ export default function Profile({title,navigation}) {
                
         </View>
         
-        <Button_dark onpress={()=> navigation.navigate('Pass_change_success')}  Title1='Save' Title2='none' upper_margin={windowHeight/7}  fontsize={18}/> 
+        <Button_dark onpress={()=> navigation.navigate('Pass_change_success')}  Title1='Save' Title2='none' upper_margin={windowHeight/5}  fontsize={18}/> 
 
        
       </ScrollView>

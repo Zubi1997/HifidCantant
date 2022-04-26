@@ -1,6 +1,8 @@
 import React,{useState,useRef} from 'react';
 import { StyleSheet, Text, View, TouchableOpacity,Dimensions,SafeAreaView ,FlatList, ScrollView} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { NavigationContainer, useFocusEffect } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Entypo from 'react-native-vector-icons/Entypo'
 import colors from '../../../assets/colors';
 import Button_dark from '../../components/Button_dark';
@@ -9,11 +11,38 @@ import { Credit_card_fill, UNcategorized_logo } from '../../../assets/svg_images
 var windowWidth = Dimensions.get('window').width
 var windowHeight=Dimensions.get('window').height
 
-export default function Transactions({title,navigation}) {
+export default function Transactions({title,navigation,route}) {
 
     const [manual_time, set_manual_time] = useState('');
     const toastRef = useRef();
- 
+    const [transaction_setup, set_transaction_setup] = useState(false);
+    const catgry_type=route.params.cat_type
+
+    useFocusEffect(
+      React.useCallback(() => {
+        // Do something when the screen is focused
+        
+          const detectLogin = async () => {
+            console.log(route.params.cat_type)
+            let link = await AsyncStorage.getItem("link_account");
+            let parsedlink = JSON.parse(link); 
+            if(parsedlink=='true' || parsedlink==true){
+              set_transaction_setup(true)
+            }
+            else{
+              set_transaction_setup(false)
+            }
+        }
+        detectLogin(); 
+  
+        return () => {
+       //  console.log('Screen was unfocused');
+  
+        };
+      }, [])
+    );
+  
+
     const data = [
       {
         id: '1',
@@ -120,18 +149,27 @@ export default function Transactions({title,navigation}) {
       <View style={styles.container}>
         <View style={styles.head}>
           <Text style={styles.head_txt1}>Your Transactions</Text>
+          {transaction_setup==true?
+          <Text style={styles.head_txt2}>Label your {route.params.cat_type=='uncategorized'?'uncategorized':'categorized'} transactions (5)</Text>
+            :
           <Text style={styles.head_txt2}>you don't have a transaction yet, please link your bank account with cantant</Text>
-        </View>
+          }
+          </View>
         
         <ScrollView style={{paddingHorizontal:windowWidth/20,marginTop:20 }}>
          
           {cashInflow()}
           {cashoutflow()}
         </ScrollView>
-
+        {transaction_setup==true?
+        <View style={{justifyContent:'flex-end',marginBottom:5,paddingHorizontal:windowWidth/20}}>
+          <Button_dark onpress={()=> navigation.navigate('Bottomtabbar')} Title1='Add Cash Transactions' Title2='none' upper_margin={5}  fontsize={18}/>
+        </View>
+        :
         <View style={{justifyContent:'flex-end',marginBottom:5,paddingHorizontal:windowWidth/20}}>
           <Button_dark onpress={()=> navigation.navigate('Bottomtabbar')} Title1='Link your bank account' Title2='none' upper_margin={5}  fontsize={18}/>
         </View>
+        }
 
        
       </View>

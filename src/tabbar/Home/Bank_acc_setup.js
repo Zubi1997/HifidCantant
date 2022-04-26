@@ -21,13 +21,33 @@ export default function Profile({title,navigation}) {
     const [acc_holder, set_acc_holder] = useState('');
     const [bank_acc, set_bank_acc] = useState('');
     const [acc_number, set_acc_number] = useState('');
-    const [business_type, set_business_type] = useState('Click to select');
+    const [expiry_date, set_expiry_date] = useState('');
     const [state, set_state] = useState('Select your state');
 
     const [modal_business, set_modal_business] = useState(false);
     const [show_pass, set_show_pass] = useState(false);
 
     
+  const expiry_date_change=(value)=>{
+    console.log(value)
+    console.log(value.length)
+    var aa=''
+   
+    if(value.length==2 && !value.includes('/') ){
+      set_expiry_date(value+'/')
+    }
+    else if((value.length==2 && value.includes('/'))|| value.length>3 ){
+      set_expiry_date(value)
+    }
+    else if(value.length==3){
+      aa=value.slice(0,1)
+      set_expiry_date(aa)
+    }
+    else{
+      set_expiry_date(value)
+    }
+
+  }
 
   return (
         
@@ -71,13 +91,14 @@ export default function Profile({title,navigation}) {
                 placeholder='MM/YY'
                 placeholderTextColor="#6F6F6F"
                 style={styles.Input}
-                value={bank_acc}
+                value={expiry_date}
                 keyboardType='decimal-pad'
-                onChangeText={(p)=>set_bank_acc(p)}
+                maxLength={5}
+                onChangeText={(p)=>expiry_date_change(p)}
               />
         </View>
         
-        <Button_dark onpress={()=>navigation.navigate('Link_acc_complete')} Title1='Link your bank account' Title2='Arrows69' upper_margin={50} fontsize={18}/>
+        <Button_dark onpress={()=>navigation.navigate('Link_acc_complete')} Title1='Link your bank account' Title2='Arrows69' upper_margin={windowHeight/8} fontsize={18}/>
 
         
        

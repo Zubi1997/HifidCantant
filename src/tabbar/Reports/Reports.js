@@ -17,6 +17,8 @@ export default function Home({title,navigation}) {
 
   const [selected_tab, set_selected_tab] = useState("cashflow");
   const [modal_visible, set_modal_visible] = useState(false);
+  const [transaction_setup, set_transaction_setup] = useState(false);
+
 
   const scrollref=useRef()
 
@@ -60,6 +62,7 @@ export default function Home({title,navigation}) {
           let link = await AsyncStorage.getItem("link_account");
           let parsedlink = JSON.parse(link); 
           if(parsedlink=='true' || parsedlink==true){
+            set_transaction_setup(true)
             set_modal_visible(false)
           }
           else{
@@ -82,7 +85,7 @@ export default function Home({title,navigation}) {
           <View style={styles.modalView}>
             <View style={styles.modal_logo_view}>
               <Image style={styles.modal_logo} source={require('../../../assets/png/home_modal_logo.png')}/>
-              <Text style={[styles.blacktxt20,{marginTop:10}]}>Let’s get you setup</Text>
+              <Text style={[styles.blacktxt20,{marginTop:10}]}>Let{'’'}s get you setup</Text>
               <Text style={styles.greytxt16}>Link your bank account and get financial insights about your business</Text>
             </View>
             <View style={{justifyContent:'space-between',}}>
@@ -115,7 +118,8 @@ export default function Home({title,navigation}) {
             </TouchableOpacity>
           </View>
         </View> 
-
+        {transaction_setup==true?
+        
         <ScrollView
               showsHorizontalScrollIndicator={false}
               ref={scrollref} 
@@ -128,6 +132,20 @@ export default function Home({title,navigation}) {
               <Cashout_report />
 
         </ScrollView>
+        :
+        <ScrollView
+          showsHorizontalScrollIndicator={false}
+          ref={scrollref} 
+          horizontal
+          scrollEnabled={false}
+          
+          >
+          <View style={{width:windowWidth}}></View>
+          <View style={{width:windowWidth}}></View>
+          <View style={{width:windowWidth}}></View>
+
+        </ScrollView>
+        }
 
         
         {/* <Button_dark onpress={()=> {set_modal_visible(false),navigation.navigate('Link_acc_desc')}} Title1='Link your bank account' Title2='none' upper_margin={10}  fontsize={18}/> */}

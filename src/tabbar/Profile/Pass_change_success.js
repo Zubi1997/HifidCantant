@@ -28,7 +28,7 @@ export default function Profile({title,navigation}) {
                 <Text style={styles.congo_txt2}>Your new password has been successfully changed</Text>
             </View>
         </View>
-        <Button_dark onpress={()=> navigation.pop(2)}  Title1='Back to profile' Title2='none' upper_margin={windowHeight/10}  fontsize={18}/> 
+        <Button_dark onpress={()=> navigation.pop(2)}  Title1='Back to profile' Title2='none' upper_margin={windowHeight/5}  fontsize={18}/> 
 
             {/* <Button_dark onpress={()=>link_done()} Title1='Back to home' Title2='none' upper_margin={50} fontsize={18}/> */}
       </View>

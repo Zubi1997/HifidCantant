@@ -11,7 +11,7 @@ import Splash from './src/onboarding/Splash';
 import Signup_main from './src/onboarding/Signup_main'
 import Signup from './src/onboarding/Signup'
 import Confirmation_email from './src/onboarding/Confirmation_email'
-import Profile from './src/onboarding/Profile'
+import Profile_auth from './src/onboarding/Profile'
 import Pascode_setup from './src/onboarding/Pascode_setup'
 import Pascode_confirm from './src/onboarding/Pascode_confirm'
 import Login from './src/onboarding/Login';
@@ -33,7 +33,8 @@ import Add_cash_inflow from './src/tabbar/Transactions/Add_cash_inflow'
 import Single_cashin from './src/tabbar/Transactions/Single_cashin'
 import Add_cash_outflow from './src/tabbar/Transactions/Add_cash_outflow'
 import Single_cashout from './src/tabbar/Transactions/Single_cashout'
-
+//react-native-popup-menu
+import { MenuProvider } from 'react-native-popup-menu';
 //testing
 import Testing_purpose from './src/components/Testing_purpose'
 //colors file
@@ -69,7 +70,7 @@ function App() {
     // alert('jhbkbk')
     return (
       <TransactionStack.Navigator >
-        <TransactionStack.Screen name="Transactionss" component={Transactions} options={{ headerShown: false }}/>
+        <TransactionStack.Screen initialParams={{cat_type:'uncategorized'}} name="Transactionss" component={Transactions} options={{ headerShown: false }}/>
         <TransactionStack.Screen name="Add_cash_inflow" component={Add_cash_inflow} options={{ headerShown: false }}/>
         <TransactionStack.Screen name="Single_cashin" component={Single_cashin} options={{ headerShown: false }}/>
         <TransactionStack.Screen name="Add_cash_outflow" component={Add_cash_outflow} options={{ headerShown: false }}/>
@@ -129,15 +130,16 @@ function App() {
    
       >
         <Tab.Screen  name="Home" component={HomeStackScreen}   options={{ headerShown: false }}/>
-        <Tab.Screen name="Transactions" component={TransactionStackScreen}  options={{ headerShown: false }} />
+        <Tab.Screen name="Transactions"  component={TransactionStackScreen}  options={{ headerShown: false }} />
         <Tab.Screen  name="Reports" component={Reports}  options={{ headerShown: false }} />
-        <Tab.Screen name="Profile" component={Profile}  options={{ headerShown: false }}/>
+        <Tab.Screen name="Profile" component={TabProfile}  options={{ headerShown: false }}/>
   
       </Tab.Navigator>
     );
   }
 
   return (
+    <MenuProvider >
     <NavigationContainer>
       <Stack.Navigator>
 
@@ -149,7 +151,7 @@ function App() {
         <Stack.Screen name="Signup_main" component={Signup_main}  options={{ headerShown: false }}/>
         <Stack.Screen name="Signup" component={Signup}  options={{ headerShown: false }}/>
         <Stack.Screen name="Confirmation_email" component={Confirmation_email}  options={{ headerShown: false }}/>
-        <Stack.Screen name="Profile" component={Profile}  options={{ headerShown: false }}/>
+        <Stack.Screen name="Profile_auth" component={Profile_auth}  options={{ headerShown: false }}/>
         <Stack.Screen name="Pascode_setup" component={Pascode_setup}  options={{ headerShown: false }}/>
         <Stack.Screen name="Pascode_confirm" component={Pascode_confirm}  options={{ headerShown: false }}/>
         <Stack.Screen name="Login" component={Login}  options={{ headerShown: false }}/>
@@ -167,6 +169,7 @@ function App() {
 
       </Stack.Navigator>
     </NavigationContainer>
+  </MenuProvider>
   );
 }
 

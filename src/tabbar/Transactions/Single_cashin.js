@@ -261,7 +261,7 @@ import { Credit_card_fill } from '../../../assets/svg_images';
 
           </ScrollView>
   
-          <View style={{justifyContent:'flex-end',marginBottom:5,paddingHorizontal:windowWidth/20}}>
+          <View style={{justifyContent:'flex-end',marginBottom:30,paddingHorizontal:windowWidth/20}}>
             <Button_dark onpress={()=> set_modal_visible(true)} Title1='Save' Title2='none' upper_margin={5}  fontsize={18}/>
           </View>
 
@@ -278,9 +278,6 @@ import { Credit_card_fill } from '../../../assets/svg_images';
                 borderTopLeftRadius:10,
                 borderTopRightRadius:10,
               },
-
-
-          
           }}
         >
             {sheet_state_data()}

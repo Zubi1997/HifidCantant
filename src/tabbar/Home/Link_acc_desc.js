@@ -35,10 +35,10 @@ export default function Transactions({title,navigation}) {
             <Link_account />
           </View>
         </View>
-        {tick_text('Real-time business insights on bank transfers, POS/ATM transactions, etc.',50)}
+        {tick_text('Real-time business insights on bank transfers, POS/ATM transactions, etc.',60)}
         {tick_text('Seamlessly and securely connect all your bank accounts in seconds',20)}
 
-        <View style={{justifyContent:'flex-end',marginBottom:windowHeight/10,marginTop:20}}>
+        <View style={{justifyContent:'flex-end',marginBottom:windowHeight/10,marginTop:40}}>
           <Button_dark onpress={()=> navigation.navigate('Bank_acc_setup')} Title1='Continue' Title2='none' upper_margin={20}  fontsize={18}/>
         </View>
        
