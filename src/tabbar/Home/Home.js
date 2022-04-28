@@ -97,6 +97,7 @@ export default function Home({title,navigation}) {
                 params: {
                   screen: 'Add_cash_inflow',
                   params: {
+                    from:'home'
                     // title: 'Your custom title for Select screen here ...',
                   },
                 },
@@ -111,13 +112,14 @@ export default function Home({title,navigation}) {
                     params: {
                       screen: 'Add_cash_outflow',
                       params: {
+                        from:'home'
                         // title: 'Your custom title for Select screen here ...',
                       },
                     },
                   });
                   }} style={styles.submit}>
                 <Add_cashout_logo />
-                <Text style={[styles.submit_txt,{fontSize:18}]}>Add cash outflow</Text>
+                <Text style={[styles.submit_txt,{fontSize:15}]}>Add cash outflow</Text>
             </TouchableOpacity>
             
           </View>
@@ -133,7 +135,21 @@ export default function Home({title,navigation}) {
         <View style={styles.head}>
           <Text style={styles.headtxt1}>Your Balance</Text>
           <View style={styles.head2}>
-            <Picker
+          <Menu >
+            <MenuTrigger customStyles={{backgroundColor:'grey'}}>
+                <View style={{height:40,alignItems:'center',justifyContent:'center',flexDirection:'row'}}>
+                  <Text style={{color:'white'}}>{selectedValue} </Text>
+                  <Entypo name={'chevron-small-down'} style={{alignSelf:'center'}} size={30} color={'white'} />
+                </View>
+            </MenuTrigger>
+            <MenuOptions  customStyles={optionsStyles }>
+              <MenuOption onSelect={() => setSelectedValue(`Today`)} text='Today' />
+              <MenuOption onSelect={() => setSelectedValue(`This Week`)} text='This Week' />
+              <MenuOption onSelect={() => setSelectedValue(`This Month`)} text='This Month' />
+              <MenuOption onSelect={() => setSelectedValue(`This Year`)} text='This Year' />
+            </MenuOptions>
+          </Menu>
+            {/* <Picker
               mode='dropdown'
               selectedValue={selectedValue}
               onValueChange={(itemValue, itemIndex) =>setSelectedValue(itemValue)}
@@ -144,7 +160,7 @@ export default function Home({title,navigation}) {
               <Picker.Item label="This Week" value="This Week" />
               <Picker.Item label="This Month" value="This Month" />
               <Picker.Item label="This Year" value="This Year" />
-            </Picker>
+            </Picker> */}
           </View>
         </View>  
         <Text style={[styles.headtxt1,{color:'#356F70',marginLeft:10}]}>0</Text>
@@ -152,12 +168,12 @@ export default function Home({title,navigation}) {
         <View style={styles.cashview}>
           <View style={styles.cashview1}>
             <Text style={styles.cashview1_txt1}>Cash In</Text>
-            <Text style={[styles.cashview1_txt2,{color:'#08AD58'}]}>0</Text>
+            <Text style={[styles.cashview1_txt2,{color:'#08AD58'}]}>5000</Text>
           </View>
           <View style={styles.cashview_divider}></View>
           <View style={styles.cashview1}>
             <Text style={styles.cashview1_txt1}>Cash Out</Text>
-            <Text style={[styles.cashview1_txt2]}>0</Text>
+            <Text style={[styles.cashview1_txt2]}>5000</Text>
           </View>
         </View>
 
@@ -174,20 +190,6 @@ export default function Home({title,navigation}) {
             </View>
           </View>
         </View>
-          <Menu >
-            <MenuTrigger customStyles={{backgroundColor:'grey'}}>
-                <View style={{height:40,width:200,alignItems:'center',justifyContent:'center'}}>
-                  <Text>hvjhbccdcjh </Text>
-                </View>
-            </MenuTrigger>
-            <MenuOptions  customStyles={{backgroundColor:'red'}}>
-              <MenuOption onSelect={() => alert(`Save`)} text='Save' />
-              <MenuOption onSelect={() => alert(`Delete`)} >
-                <Text style={{color: 'red'}}>Delete</Text>
-              </MenuOption>
-              <MenuOption onSelect={() => alert(`Not called`)} disabled={true} text='Disabled' />
-            </MenuOptions>
-          </Menu>
 
         <View style={styles.progess_view}>
           <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
@@ -295,7 +297,7 @@ const styles = StyleSheet.create({
   },
   head2:{
     height:40,
-    width:windowWidth/2.5,
+    width:130,
     justifyContent:'center',
     backgroundColor:colors.nextbtn,
     borderRadius:5,
@@ -486,7 +488,7 @@ const styles = StyleSheet.create({
     width:'100%'
   },
   submit_txt:{
-    
+    marginLeft:10,
     color:'white',
     fontWeight:'600'
   },
@@ -495,3 +497,30 @@ const styles = StyleSheet.create({
 
 });
 
+
+const optionsStyles = {
+  optionsContainer: {
+    // backgroundColor: 'green',
+    width:130,
+    height:140,
+    alignItems:'center',
+  },
+  optionsWrapper: {
+    // backgroundColor: 'purple',
+    alignItems:'center',
+    width:130
+  },
+  optionWrapper: {
+    // backgroundColor: 'yellow',
+    alignItems:'center',
+    width:130,
+    paddingVertical:7
+  },
+  optionTouchable: {
+    // underlayColor: 'gold',
+    // activeOpacity: 70,
+  },
+  optionText: {
+    color: 'black',
+  },
+};

@@ -15,7 +15,7 @@ import { Searchbar } from "react-native-paper";
   var windowWidth = Dimensions.get('window').width
   var windowHeight=Dimensions.get('window').height
   
-  export default function Transactions({title,navigation}) {
+  export default function Transactions({title,navigation,route}) {
   
       const [date, set_date] = useState(new Date());
       const [time, set_time] = useState(new Date());
@@ -119,15 +119,21 @@ import { Searchbar } from "react-native-paper";
       };
       
     useEffect(()=>{
-      // console.log('aaaaaaaaaaa',navigation)
+      console.log('aaaaazzzzzzzzzzaaaaaa',route.params.from)
 
     BackHandler.addEventListener("hardwareBackPress", () => {
-      // navigation.pop()
+      // 
       // console.log('zzzzzzzzz',navigation)
-      navigation.reset({
-        index: 0,
-        routes: [{ name: 'Home' }],
-      });
+      if(route.params.from=='transaction'){
+        // navigation.navigate('Transactions')
+        navigation.goBack()
+      }
+      else{
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'Home' }],
+        });
+      }
 
     })
 

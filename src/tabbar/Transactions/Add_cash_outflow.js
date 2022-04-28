@@ -211,11 +211,16 @@ import { Computer_phone, Electricity_fuel, Fastfood, Supply,Transport,Rent,Salar
     BackHandler.addEventListener("hardwareBackPress", () => {
       // navigation.pop()
       // console.log('zzzzzzzzz',navigation)
+      if(route.params.from=='transaction'){
+        // navigation.navigate('Transactions')
+        navigation.goBack()
+      }
+      else{
       navigation.reset({
         index: 0,
         routes: [{ name: 'Home' }],
       });
-
+      }
     })
 
   },[])
@@ -342,11 +347,7 @@ import { Computer_phone, Electricity_fuel, Fastfood, Supply,Transport,Rent,Salar
   
           <View style={{justifyContent:'flex-end',marginBottom:5,paddingHorizontal:windowWidth/20}}>
             <Button_dark onpress={()=> { 
-                // navigation.popToTop()     
-                navigation.reset({
-                    index: 0,
-                    routes: [{ name: 'Bottomtabbar' }],
-                  })
+                navigation.goBack()
                 }} Title1='Save' Title2='none' upper_margin={5}  fontsize={18}/>
           </View>
 

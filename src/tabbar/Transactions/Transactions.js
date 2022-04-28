@@ -1,12 +1,12 @@
 import React,{useState,useRef} from 'react';
-import { StyleSheet, Text, View, TouchableOpacity,Dimensions,SafeAreaView ,FlatList, ScrollView} from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity,Dimensions,SafeAreaView ,FlatList,Modal, ScrollView} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { NavigationContainer, useFocusEffect } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Entypo from 'react-native-vector-icons/Entypo'
 import colors from '../../../assets/colors';
 import Button_dark from '../../components/Button_dark';
-import { Credit_card_fill, UNcategorized_logo } from '../../../assets/svg_images';
+import { Credit_card_fill, UNcategorized_logo,Add_cashin_logo,Add_cashout_logo } from '../../../assets/svg_images';
 
 var windowWidth = Dimensions.get('window').width
 var windowHeight=Dimensions.get('window').height
@@ -16,6 +16,8 @@ export default function Transactions({title,navigation,route}) {
     const [manual_time, set_manual_time] = useState('');
     const toastRef = useRef();
     const [transaction_setup, set_transaction_setup] = useState(false);
+    const [modal_visible_add_trans, set_modal_visible_add_trans] = useState(false);
+
     const catgry_type=route.params.cat_type
 
     useFocusEffect(
@@ -143,6 +145,31 @@ export default function Transactions({title,navigation,route}) {
     )
   }
 
+  const render_modal_view_add_trans=()=>{
+    return(
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <View style={styles.modal_logo_view}>
+              <Text style={styles.blacktxt20}>Choose your transactions</Text>
+            </View>
+            <Button_dark onpress={()=>{
+              set_modal_visible_add_trans(false)
+              navigation.navigate('Add_cash_inflow',{from:'transaction'});
+              }}
+               Title1='Add cash inflow' Title2='Add_cashin_logo' upper_margin={20} fontsize={15}/>
+            
+            <TouchableOpacity onPress={()=>{
+                  set_modal_visible_add_trans(false)
+                  navigation.navigate('Add_cash_outflow',{from:'transaction'});
+                  }} style={styles.submit}>
+                <Add_cashout_logo />
+                <Text style={[styles.submit_txt,{fontSize:15}]}>Add cash outflow</Text>
+            </TouchableOpacity>
+            
+          </View>
+        </View>
+    )
+  }
 
   return (
         
@@ -155,23 +182,38 @@ export default function Transactions({title,navigation,route}) {
           <Text style={styles.head_txt2}>you don't have a transaction yet, please link your bank account with cantant</Text>
           }
           </View>
-        
+        {transaction_setup==true?
+        <>
         <ScrollView style={{paddingHorizontal:windowWidth/20,marginTop:20 }}>
          
           {cashInflow()}
           {cashoutflow()}
         </ScrollView>
-        {transaction_setup==true?
-        <View style={{justifyContent:'flex-end',marginBottom:5,paddingHorizontal:windowWidth/20}}>
-          <Button_dark onpress={()=> navigation.navigate('Bottomtabbar')} Title1='Add Cash Transactions' Title2='none' upper_margin={5}  fontsize={18}/>
+        
+        <View  style={{justifyContent:'flex-end',marginBottom:5,paddingHorizontal:windowWidth/20}}>
+          <Button_dark onpress={()=>set_modal_visible_add_trans(true)} Title1='Add Cash Transactions' Title2='none' upper_margin={5}  fontsize={18}/>
         </View>
+        </>
         :
-        <View style={{justifyContent:'flex-end',marginBottom:5,paddingHorizontal:windowWidth/20}}>
-          <Button_dark onpress={()=> navigation.navigate('Bottomtabbar')} Title1='Link your bank account' Title2='none' upper_margin={5}  fontsize={18}/>
+        <>
+        <View style={{flex:1}}></View>
+        <View  style={{justifyContent:'flex-end',marginBottom:5,paddingHorizontal:windowWidth/20}}>
+          <Button_dark onpress={()=> navigation.navigate('Link_acc_desc')} Title1='Link your bank account' Title2='none' upper_margin={5}  fontsize={18}/>
         </View>
+        </>
         }
 
-       
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={modal_visible_add_trans}
+            onRequestClose={() => {
+              // console.log("Modal has been closed.");
+              set_modal_visible_add_trans(!modal_visible_add_trans);
+            }}
+          >
+           {render_modal_view_add_trans()}
+          </Modal>
       </View>
 
 
@@ -245,7 +287,65 @@ const styles = StyleSheet.create({
     marginHorizontal:5,
     fontSize:16,
     color:colors.green_txt
-  }
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor:'rgba(0, 0, 0, 0.6) '
+  },
+  modalView: {
+
+    backgroundColor: "white",
+    padding: 30,
+    width:windowWidth/1.2,
+
+    borderRadius:10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5
+  },
+  modal_save_btn:{
+    alignItems:'center',
+    justifyContent:'center',
+    backgroundColor:'#5AB3A8',
+    width:210,
+    padding:10,
+    borderRadius:5
+  },
+  modal_logo_view:{
+    alignItems:'center'
+  },
+  modal_logo:{
+    width:windowWidth/3,
+     height:windowWidth/3,
+  },
+  blacktxt20:{
+    color:'black',
+    fontSize:20,
+    fontWeight:'600',
+    textAlign:'center'
+  },
+  submit:{
+    backgroundColor:colors.red_btn,
+    flexDirection:'row',
+    padding:10,
+    borderRadius:10,
+    alignItems:'center',
+    justifyContent:'center',
+    marginTop:20,
+    width:'100%'
+  },
+  submit_txt:{
+    
+    color:'white',
+    fontWeight:'600'
+  },
 
 });
 

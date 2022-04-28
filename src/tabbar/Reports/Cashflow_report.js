@@ -25,11 +25,11 @@ export default function Pre_orders({route,navigation}) {
     const [data, set_data] = useState({
         dataSets: [{
           // values: [5, -40, 17, 81, 43],
-          values: [{y: -224.1}, {y: 238.5}, {y: 1280.1}, {y: -442.3}, {y: -2280.1},{y: -442.3}, {y: -2280.1}],
+          values: [{y: -224.1}, {y: 238.5}, {y: 1280.1}, {y: -442.3}, {y: 2280.1},{y: -442.3}, {y: -2280.1}],
           label: 'Zero line dataset',
           config: {
             visible: true,
-            colors: [GREEN, GREEN,RED, GREEN, RED],
+            colors: [RED,GREEN,GREEN,RED, GREEN,RED, RED],
             
             
           }
@@ -85,10 +85,10 @@ export default function Pre_orders({route,navigation}) {
                 </MenuTrigger>
                 <MenuOptions customStyles={optionsStyles }>
                   <View >
-                  <MenuOption onSelect={() => set_cash_flow_year(`2019`)} text='2019' />
-                  <MenuOption onSelect={() => set_cash_flow_year(`2020`)} text='2020' />
-                  <MenuOption onSelect={() => set_cash_flow_year(`2021`)} text='2021' />
                   <MenuOption onSelect={() => set_cash_flow_year(`2022`)} text='2022' />
+                  <MenuOption onSelect={() => set_cash_flow_year(`2023`)} text='2023' />
+                  <MenuOption onSelect={() => set_cash_flow_year(`2024`)} text='2024' />
+                  <MenuOption onSelect={() => set_cash_flow_year(`2025`)} text='2025' />
                   </View>
                 </MenuOptions>
               </Menu>

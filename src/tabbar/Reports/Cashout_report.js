@@ -21,8 +21,9 @@ export default function Pre_orders({route,navigation}) {
 
     const [manual_time, set_manual_time] = useState('');
     const toastRef = useRef();
-    const [cashin_monthly, set_cashin_monthly] = useState('2022');
+    const [cash_flow_year, set_cash_flow_year] = useState('2022');
     const [cashin_this_month, set_cashin_this_month] = useState('Feb');
+    const month_array = [{id: '1',name: 'Feb'},{id: '1',name: 'Mar'},{id: '1',name: 'Apr'},{id: '1',name: 'May'},{id: '1',name: 'Jun'},{id: '1',name: 'Jul'},{id: '1',name: 'Aug'},{id: '1',name: 'Sep'},{id: '1',name: 'Oct'},{id: '1',name: 'Nov'},{id: '1',name: 'Dec'}];
 
     const data_array = [
       {
@@ -119,6 +120,12 @@ export default function Pre_orders({route,navigation}) {
       // <Text>{item.name}</Text>
     )
   }
+  const render_menu_options=(item,index)=>{
+    return(
+      <MenuOption key={index} onSelect={() => set_cashin_this_month(item.name)} text={item.name} />
+
+    )
+  }
 
   return (
         
@@ -131,16 +138,16 @@ export default function Pre_orders({route,navigation}) {
             <Menu >
                 <MenuTrigger >
                     <View style={{height:40,flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
-                      <Text style={{color:'black'}}>{cashin_monthly}</Text>
+                      <Text style={{color:'black'}}>{cash_flow_year}</Text>
                       <Entypo name={'chevron-small-down'} style={{alignSelf:'center'}} size={30} color={'#4F4F4F'} />
                     </View>
                 </MenuTrigger>
                 <MenuOptions customStyles={optionsStyles }>
                   <View >
-                  <MenuOption onSelect={() => set_cashin_monthly(`2019`)} text='2019' />
-                  <MenuOption onSelect={() => set_cashin_monthly(`2020`)} text='2020' />
-                  <MenuOption onSelect={() => set_cashin_monthly(`2021`)} text='2021' />
-                  <MenuOption onSelect={() => set_cashin_monthly(`2022`)} text='2022' />
+                  <MenuOption onSelect={() => set_cash_flow_year(`2022`)} text='2022' />
+                  <MenuOption onSelect={() => set_cash_flow_year(`2023`)} text='2023' />
+                  <MenuOption onSelect={() => set_cash_flow_year(`2024`)} text='2024' />
+                  <MenuOption onSelect={() => set_cash_flow_year(`2025`)} text='2025' />
                   </View>
                 </MenuOptions>
               </Menu>
@@ -181,12 +188,9 @@ export default function Pre_orders({route,navigation}) {
                     </View>
                 </MenuTrigger>
                 <MenuOptions customStyles={optionsStyles }>
-                  <View >
-                  <MenuOption onSelect={() => set_cashin_this_month(`Feb`)} text='Feb' />
-                  <MenuOption onSelect={() => set_cashin_this_month(`Mar`)} text='Mar' />
-                  <MenuOption onSelect={() => set_cashin_this_month(`Apr`)} text='Apr' />
-                  <MenuOption onSelect={() => set_cashin_this_month(`May`)} text='May' />
-                  </View>
+                  <ScrollView showsVerticalScrollIndicator={false}>
+                    {month_array.map((item, index)=> render_menu_options(item,index))}
+                  </ScrollView>
                 </MenuOptions>
               </Menu>
 
@@ -315,6 +319,7 @@ const optionsStyles = {
   optionsContainer: {
     // backgroundColor: 'green',
     width:120,
+    height:150,
     alignItems:'center',
   },
   optionsWrapper: {
