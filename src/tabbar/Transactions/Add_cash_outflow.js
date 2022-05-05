@@ -16,7 +16,7 @@ import { Computer_phone, Electricity_fuel, Fastfood, Supply,Transport,Rent,Salar
   var windowWidth = Dimensions.get('window').width
   var windowHeight=Dimensions.get('window').height
   
-  export default function Transactions({title,navigation}) {
+  export default function Transactions({title,navigation,route}) {
   
       const [date, set_date] = useState(new Date());
       const [time, set_time] = useState(new Date());
@@ -246,7 +246,7 @@ import { Computer_phone, Electricity_fuel, Fastfood, Supply,Transport,Rent,Salar
                 <TouchableOpacity onPress={()=>Sheet_category.current.close()}>
                     <AntDesign name="closecircle" size={24} color="#dadce2" />
                 </TouchableOpacity>
-                <Text style={styles.sheet_head}>Type of Business</Text>
+                <Text style={styles.sheet_head}>Type of Expense</Text>
                 <Text></Text>
             </View>
             <FlatList

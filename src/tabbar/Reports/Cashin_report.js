@@ -15,9 +15,10 @@ import {
 var windowWidth = Dimensions.get('window').width
 var windowHeight=Dimensions.get('window').height
 
-
 const GREEN = processColor('#53B683');
 const RED = processColor('#EB4442');
+const GREEN_txt = '#53B683';
+const RED_txt = '#EB4442';
 export default function Pre_orders({route,navigation}) {
 
     const [manual_time, set_manual_time] = useState('');
@@ -36,7 +37,8 @@ export default function Pre_orders({route,navigation}) {
         name: 'Shoes',
         color: "#27564f",
         amount: "20,000",
-        percentage: "50"
+        percentage: "50",
+        previous_value:'50'
       },
   
       {
@@ -44,28 +46,32 @@ export default function Pre_orders({route,navigation}) {
         name: 'Cash Deposit',
         color: "#336759",
         amount: "20,000",
-        percentage: "20"
+        percentage: "20",
+        previous_value:'-20'
       },
       {
         id: '3',
         name: 'Investment',
         color: "#448168",
         amount: "20,000",
-        percentage: "10"
+        percentage: "10",
+        previous_value:'10'
       },
       {
         id: '',
         name: 'Others',
         color: "#579a77",
         amount: "20,000",
-        percentage: "10"
+        percentage: "10",
+        previous_value:'-20'
       },
       {
         id: '5',
         name: 'Uncategorised',
         color: "#bbbbbb",
         amount: "20,000",
-        percentage: "10"
+        percentage: "10",
+        previous_value:'10'
       },
     ];
     const [data, set_data] = useState({
@@ -119,8 +125,10 @@ export default function Pre_orders({route,navigation}) {
       <View key={index} style={styles.render_single_pie}>
         <View style={[styles.pie_render_dot,{backgroundColor:item.color,}]}></View>
         <Text style={{marginLeft:10,width:'40%',flex:1}}>{item.name}</Text>
-        <Text style={{marginLeft:10,width:'20%',color:'black'}}>{item.amount}</Text>
-        <Text style={{marginLeft:10,width:'20%'}}>{item.percentage} %</Text>
+        <Text style={{marginLeft:10,width:60,color:'black'}}>{item.amount}</Text>
+        <Text style={{marginLeft:10,width:45}}>{item.percentage} %</Text>
+        <Text style={{marginLeft:10,width:45,color:item.previous_value>0?GREEN_txt:RED_txt}}>{item.previous_value} %</Text>
+
       </View>
       // <Text>{item.name}</Text>
     )

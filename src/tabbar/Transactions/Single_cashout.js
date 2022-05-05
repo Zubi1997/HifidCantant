@@ -209,7 +209,7 @@ import { Computer_phone, Electricity_fuel, Fastfood, Supply,Transport,Rent,Salar
                 <TouchableOpacity onPress={()=>Sheet_category.current.close()}>
                     <AntDesign name="closecircle" size={24} color="#dadce2" />
                 </TouchableOpacity>
-                <Text style={styles.sheet_head}>Type of Business</Text>
+                <Text style={styles.sheet_head}>Type of Expense</Text>
                 <Text></Text>
             </View>
             <FlatList

@@ -34,19 +34,23 @@ export default function Pre_orders({route,navigation}) {
             
           }
         }],
-        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+        // labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
 
       });
     const [xAxis, set_xAxis] = useState( {
         inverted:false,
         enabled: true,
-        drawLabels: false,
+        drawLabels: true,
         drawAxisLine: false,
         drawGridLines: false,
         labelCount:6,
+        valueFormatter: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
 
-      });
-    const [yAxis, set_yAxis] = useState({
+
+        // drawLabels: false,
+        position:"BOTTOM",
+      });  
+    const [yAxis, set_yAxis] = useState({ 
         left: {
           drawLabels: true,
           drawAxisLine: false,
@@ -186,7 +190,8 @@ const styles = StyleSheet.create({
   },
   chart: {
     flex: 1,
-    marginTop:30
+    marginTop:30,
+    marginBottom:20
   }
 
 });

@@ -421,11 +421,11 @@ export default function Profile({title,navigation}) {
           closeOnPressMask={true}
           closeOnDragDown={false}
           dragFromTopOnly	
-          height={windowWidth*1.2}
+          height={windowWidth*1.3}
           openDuration={250}
           customStyles={{
             container: {
-                flex:1,
+                // flex:1,
                 borderTopLeftRadius:10,
                 borderTopRightRadius:10,
                 backgroundColor:'#F8F8F8',

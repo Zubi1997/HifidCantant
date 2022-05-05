@@ -25,7 +25,7 @@ export default function Signup({title,navigation}) {
 
         </View>
           <Text style={styles.headtxt}>Welcome</Text>
-          <Text style={styles.headtxt2}>simply dummy text of the printing and typesetting industry.</Text>
+          <Text style={styles.headtxt2}>Sign up to Cantant, your free business accountant.</Text>
           
           <TouchableOpacity  onPress={()=>navigation.navigate('Signup')} style={[styles.submit,{marginTop:50}]}>
             <Email_logo />

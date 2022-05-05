@@ -6,7 +6,7 @@ import colors from '../../../assets/colors';
 import {Picker} from '@react-native-picker/picker';
 import { NavigationContainer, useFocusEffect } from '@react-navigation/native';
 import Button_dark from '../../components/Button_dark';
-import { Add_cashout_logo, Arrows69, Categorized_logo, UNcategorized_logo, Yellow_bulb } from '../../../assets/svg_images';
+import { Add_cashout_logo, Arrows69, Categorized_logo, Tab_reports_empty, Tab_reports_fill, UNcategorized_logo, Yellow_bulb } from '../../../assets/svg_images';
 import { ProgressBar, Colors } from 'react-native-paper';
 import { Email_svg } from '../../../assets/Svgs_business';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -186,14 +186,14 @@ export default function Home({title,navigation}) {
             </View>
             <View style={styles.business_txt_view}>
               <Text style={styles.mange_txt}>Business Tip</Text>
-              <Text style={styles.bus_tip_txt}>Property label all transactions so content can give you insights to run your business</Text>
+              <Text style={styles.bus_tip_txt}>Property label all transactions so cantant can give you insights to run your business</Text>
             </View>
           </View>
         </View>
 
         <View style={styles.progess_view}>
-          <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
-            <Text style={styles.mange_txt}>Progress</Text>
+          <View style={{flexDirection:'row',alignItems:'center'}}>
+            <Text style={[styles.mange_txt,{flex:1}]}>Label your bank transactions</Text>
             <Text style={styles.progess_headtxt2}>0 Transaction</Text>
           </View>
           <ProgressBar  progress={0.1} color={colors.nextbtn} style={styles.progess_bar}/>
@@ -382,14 +382,15 @@ const styles = StyleSheet.create({
   progess_headtxt2:{
     color:'#535353',
     fontSize:14,
-    fontWeight:'500'
+    fontWeight:'500',
+    marginLeft:10
   },
   cross_icon:{
     color: "#CCD4D6",
      fontSize: 20,
   },
   centeredView: {
-    flex: 1,
+    flex: 1, 
     justifyContent: "center",
     alignItems: "center",
     backgroundColor:'rgba(0, 0, 0, 0.6) '

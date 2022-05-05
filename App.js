@@ -87,6 +87,7 @@ function App() {
       <Tab.Navigator 
       screenOptions={
         ({ route }) => ({
+          tabBarHideOnKeyboard: true,
           tabBarActiveTintColor: colors.nextbtn,
           tabBarInactiveTintColor:colors.inactive_tab,
           tabBarShowLabel: true,
