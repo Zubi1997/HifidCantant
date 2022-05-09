@@ -393,10 +393,6 @@ const styles = StyleSheet.create({
     fontWeight:'500',
     marginLeft:10
   },
-  cross_icon:{
-    color: "#CCD4D6",
-     fontSize: 20,
-  },
   centeredView: {
     flex: 1, 
     justifyContent: "center",
