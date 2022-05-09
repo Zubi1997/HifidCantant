@@ -14,7 +14,7 @@ export default function Reports({title,navigation}) {
 
     useEffect(() => {
         setTimeout(() => {
-            navigation.navigate('Login')
+            navigation.navigate('Signup_main')
          }, 2000);
         }, [])
 

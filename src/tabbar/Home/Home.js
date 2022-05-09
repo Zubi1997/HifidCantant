@@ -87,8 +87,12 @@ export default function Home({title,navigation}) {
     return(
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
+          <TouchableOpacity onPress={()=>set_modal_visible_add_trans(false)} style={{position:'absolute',top:10,right:10,height:40,width:30}}>
+            <Entypo name='cross' style={{fontSize:25,}}/>
+          </TouchableOpacity>
             <View style={styles.modal_logo_view}>
               <Text style={styles.blacktxt20}>Choose your transactions</Text>
+              
             </View>
             <Button_dark onpress={()=>{
               set_modal_visible_add_trans(false)
@@ -103,7 +107,8 @@ export default function Home({title,navigation}) {
                 },
               });
               }}
-               Title1='Add cash inflow' Title2='Add_cashin_logo' upper_margin={20} fontsize={15}/>
+               Title1='Add cash inflow' Title2='Add_cashin_logo' upper_margin={20} fontsize={15}
+            />
             
             <TouchableOpacity onPress={()=>{
                   set_modal_visible_add_trans(false)
@@ -129,8 +134,8 @@ export default function Home({title,navigation}) {
   
 
   return (
-        
-      <ScrollView style={styles.container}>
+      <SafeAreaView style={styles.container}>
+      <ScrollView contentContainerStyle={{marginHorizontal:20,}}>
 
         <View style={styles.head}>
           <Text style={styles.headtxt1}>Your Balance</Text>
@@ -275,13 +280,16 @@ export default function Home({title,navigation}) {
           </Modal>
 
       </ScrollView>
+      </SafeAreaView>
       );
 }
 const styles = StyleSheet.create({
 
   container: {
     flex:1,
-    paddingHorizontal:windowWidth/20
+    // paddingHorizontal:20,
+    // marginHorizontal:20,
+    // backgroundColor:'red'
   },
   head:{
     flexDirection:'row',
@@ -505,6 +513,8 @@ const optionsStyles = {
     width:130,
     height:140,
     alignItems:'center',
+    marginTop:40,
+    borderRadius:5
   },
   optionsWrapper: {
     // backgroundColor: 'purple',

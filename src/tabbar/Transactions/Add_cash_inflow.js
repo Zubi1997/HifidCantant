@@ -238,7 +238,7 @@ import { Searchbar } from "react-native-paper";
   
     return (
           
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
           {Header()}
           
           <ScrollView style={styles.main_scroll_view}>
@@ -320,7 +320,7 @@ import { Searchbar } from "react-native-paper";
             {sheet_state_data()}
         </RBSheet>
 
-        </View>
+        </SafeAreaView>
   
   
   

@@ -201,6 +201,7 @@ const optionsStyles = {
     // backgroundColor: 'green',
     width:120,
     alignItems:'center',
+    marginTop:40
   },
   optionsWrapper: {
     // backgroundColor: 'purple',

@@ -20,6 +20,8 @@ target 'Hifid_Cantant_App' do
   )
 
   pod 'RNCPicker', :path => '../node_modules/@react-native-picker/picker'
+  # z
+  pod 'RNCharts', :path => '../node_modules/react-native-charts-wrapper'
 
   target 'Hifid_Cantant_AppTests' do
     inherit! :complete

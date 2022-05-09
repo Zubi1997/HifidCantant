@@ -35,7 +35,15 @@ export default function Pre_orders({route,navigation}) {
             textInputStyle={styles.otp}
             
           />
-          <Button_dark onpress={()=> navigation.navigate('Signup_main')} Title1='Login' Title2='none' upper_margin={windowHeight/10}  fontsize={18}/> 
+          <Button_dark 
+          // onpress={()=> navigation.navigate('Signup_main')}
+          onpress={()=> {
+            navigation.reset({
+              index: 0,
+              routes: [{name: 'Bottomtabbar'}],
+            });
+          }}
+           Title1='Login' Title2='none' upper_margin={windowHeight/10}  fontsize={18}/> 
 
 
 
@@ -50,7 +58,7 @@ const styles = StyleSheet.create({
     container: {
         flex:1,
         // alignItems:'center',
-        paddingHorizontal:20
+        marginHorizontal:20
     },
     logo:{
         marginTop:windowHeight/10

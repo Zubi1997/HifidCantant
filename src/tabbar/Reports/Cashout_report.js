@@ -329,6 +329,7 @@ const optionsStyles = {
     width:120,
     height:150,
     alignItems:'center',
+    marginTop:40
   },
   optionsWrapper: {
     // backgroundColor: 'purple',

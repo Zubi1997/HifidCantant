@@ -34,7 +34,7 @@ export default function Signup({title,navigation}) {
                 placeholder='Enter Email'
                 placeholderTextColor="#6F6F6F"
                 // paddingHorizontal={32}
-                keyboardType='visible-password'
+                // keyboardType='visible-password'
                 style={styles.Input}
                 value={email}
                 onChangeText={(p)=>set_email(p)}

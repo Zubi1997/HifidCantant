@@ -150,6 +150,9 @@ export default function Transactions({title,navigation,route}) {
     return(
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
+            <TouchableOpacity onPress={()=>set_modal_visible_add_trans(false)} style={{position:'absolute',top:10,right:10,height:40,width:30}}>
+              <Entypo name='cross' style={{fontSize:25,}}/>
+            </TouchableOpacity>
             <View style={styles.modal_logo_view}>
               <Text style={styles.blacktxt20}>Choose your transactions</Text>
             </View>

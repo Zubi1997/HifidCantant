@@ -275,7 +275,7 @@ import { Computer_phone, Electricity_fuel, Fastfood, Supply,Transport,Rent,Salar
             } style={{marginLeft:-10}}>
             <Entypo name={'chevron-small-left'} style={{alignSelf:'center'}} size={30} color={'white'} />
           </TouchableOpacity>
-          <Text style={styles.head_txt1}>Your Transactions</Text>
+          <Text style={styles.head_txt1}>actions</Text>
         </View>
         <Text style={styles.head_txt2}>Add Cash Outflow</Text>
       </View>
@@ -303,7 +303,7 @@ import { Computer_phone, Electricity_fuel, Fastfood, Supply,Transport,Rent,Salar
   
     return (
           
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
           {Header()}
           
           <ScrollView style={styles.main_scroll_view}>
@@ -347,7 +347,11 @@ import { Computer_phone, Electricity_fuel, Fastfood, Supply,Transport,Rent,Salar
   
           <View style={{justifyContent:'flex-end',marginBottom:5,paddingHorizontal:windowWidth/20}}>
             <Button_dark onpress={()=> { 
-                navigation.goBack()
+                // navigation.goBack()
+                navigation.reset({
+                  index: 0,
+                  routes: [{ name: 'Bottomtabbar' }],
+                })
                 }} Title1='Save' Title2='none' upper_margin={5}  fontsize={18}/>
           </View>
 
@@ -378,7 +382,7 @@ import { Computer_phone, Electricity_fuel, Fastfood, Supply,Transport,Rent,Salar
             {Sheet_category_data()}
         </RBSheet>
 
-        </View>
+        </SafeAreaView>
   
   
   

@@ -30,7 +30,7 @@ console.log(windowWidth/30)
 
   return (
         
-      <SafeAreaView style={styles.container}>
+      <ScrollView style={styles.container}>
           <View style={styles.img}>
             <Email_svg />
             <Text style={styles.head}>Email</Text>
@@ -44,7 +44,7 @@ console.log(windowWidth/30)
           </TouchableOpacity>
           <Button_dark onpress={()=> navigation.navigate('Profile_auth')} Title1='Continue' Title2='none' upper_margin={50}  fontsize={18}/>
        
-      </SafeAreaView>
+      </ScrollView>
 
       );
 }
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
 
   container: {
     flex:1,
-    paddingHorizontal:windowWidth/20,
+    paddingHorizontal:windowWidth/10,
     backgroundColor:colors.bg_color
   },
   img:{
