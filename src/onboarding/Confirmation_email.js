@@ -4,6 +4,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Entypo from 'react-native-vector-icons/Entypo'
 import {Email_svg} from '../../assets/Svgs_business';
 import colors from '../../assets/colors';
+import Button_dark from '../components/Button_dark';
 
 var windowWidth = Dimensions.get('window').width
 var windowHeight=Dimensions.get('window').height
@@ -29,20 +30,21 @@ console.log(windowWidth/30)
 
   return (
         
-      <SafeAreaView style={styles.container}>
+      <ScrollView style={styles.container}>
           <View style={styles.img}>
             <Email_svg />
             <Text style={styles.head}>Email</Text>
             <Text style={[styles.head,{color:'#626262',fontSize:18}]}>We’ve sent confirmation to your email</Text>
           </View>
-          <TouchableOpacity onPress={()=>navigation.navigate('Profile_auth')} style={styles.btn}>
+          <View  style={styles.btn}>
                 <Text style={styles.btn_txt}>{email}</Text>
-          </TouchableOpacity>
+          </View>
           <TouchableOpacity onPress={()=>navigation.goBack()} style={styles.change_email}>
             <Text style={styles.change_email_txt}>Change Email</Text>
           </TouchableOpacity>
+          <Button_dark onpress={()=> navigation.navigate('Profile_auth')} Title1='Continue' Title2='none' upper_margin={50}  fontsize={18}/>
        
-      </SafeAreaView>
+      </ScrollView>
 
       );
 }
@@ -50,7 +52,7 @@ const styles = StyleSheet.create({
 
   container: {
     flex:1,
-    paddingHorizontal:windowWidth/20,
+    paddingHorizontal:windowWidth/10,
     backgroundColor:colors.bg_color
   },
   img:{

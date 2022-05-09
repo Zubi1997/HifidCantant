@@ -14,13 +14,13 @@ export default function Transactions({title,navigation}) {
     const [manual_time, set_manual_time] = useState('');
     const toastRef = useRef();
 
-    const tick_text=(text,size)=>{
+    const tick_text=(text,margintop)=>{
         return(
-        <View style={{flexDirection:'row',marginTop:size,}}>
+        <View style={{flexDirection:'row',marginTop:margintop,}}>
             <View style={{marginTop:5}}>
                 <Tickdark />
             </View>
-            <View>
+            <View style={{flex:1}}>
                 <Text style={{marginLeft:10,fontSize:18,color:'#626262',}}>{text}</Text>
             </View>
         </View>

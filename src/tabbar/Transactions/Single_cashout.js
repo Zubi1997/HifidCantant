@@ -209,7 +209,7 @@ import { Computer_phone, Electricity_fuel, Fastfood, Supply,Transport,Rent,Salar
                 <TouchableOpacity onPress={()=>Sheet_category.current.close()}>
                     <AntDesign name="closecircle" size={24} color="#dadce2" />
                 </TouchableOpacity>
-                <Text style={styles.sheet_head}>Type of Business</Text>
+                <Text style={styles.sheet_head}>Type of Expense</Text>
                 <Text></Text>
             </View>
             <FlatList
@@ -229,7 +229,7 @@ import { Computer_phone, Electricity_fuel, Fastfood, Supply,Transport,Rent,Salar
     return(
       <View style={styles.head}>
         <View style={{flexDirection:'row',alignItems:'center'}}>
-          <TouchableOpacity style={{marginLeft:-10}}>
+          <TouchableOpacity onPress={()=>navigation.goBack()} style={{marginLeft:-10}}>
             <Entypo name={'chevron-small-left'} style={{alignSelf:'center'}} size={30} color={'white'} />
           </TouchableOpacity>
           <Text style={styles.head_txt1}>Your Transactions</Text>
@@ -254,7 +254,7 @@ import { Computer_phone, Electricity_fuel, Fastfood, Supply,Transport,Rent,Salar
   
     return (
           
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
           {Header()}
           
           <ScrollView style={styles.main_scroll_view}>
@@ -332,7 +332,7 @@ import { Computer_phone, Electricity_fuel, Fastfood, Supply,Transport,Rent,Salar
            {render_modal_view()}
           </Modal>
 
-        </View>
+        </SafeAreaView>
   
   
   

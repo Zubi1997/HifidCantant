@@ -6,7 +6,7 @@ import colors from '../../../assets/colors';
 import {Picker} from '@react-native-picker/picker';
 import { NavigationContainer, useFocusEffect } from '@react-navigation/native';
 import Button_dark from '../../components/Button_dark';
-import { Add_cashout_logo, Arrows69, Categorized_logo, UNcategorized_logo, Yellow_bulb } from '../../../assets/svg_images';
+import { Add_cashout_logo, Arrows69, Categorized_logo, Tab_reports_empty, Tab_reports_fill, UNcategorized_logo, Yellow_bulb } from '../../../assets/svg_images';
 import { ProgressBar, Colors } from 'react-native-paper';
 import { Email_svg } from '../../../assets/Svgs_business';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -87,8 +87,12 @@ export default function Home({title,navigation}) {
     return(
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
+          <TouchableOpacity onPress={()=>set_modal_visible_add_trans(false)} style={{position:'absolute',top:10,right:10,height:40,width:30}}>
+            <Entypo name='cross' style={{fontSize:25,}}/>
+          </TouchableOpacity>
             <View style={styles.modal_logo_view}>
               <Text style={styles.blacktxt20}>Choose your transactions</Text>
+              
             </View>
             <Button_dark onpress={()=>{
               set_modal_visible_add_trans(false)
@@ -103,7 +107,8 @@ export default function Home({title,navigation}) {
                 },
               });
               }}
-               Title1='Add cash inflow' Title2='Add_cashin_logo' upper_margin={20} fontsize={15}/>
+               Title1='Add cash inflow' Title2='Add_cashin_logo' upper_margin={20} fontsize={15}
+            />
             
             <TouchableOpacity onPress={()=>{
                   set_modal_visible_add_trans(false)
@@ -129,8 +134,8 @@ export default function Home({title,navigation}) {
   
 
   return (
-        
-      <ScrollView style={styles.container}>
+      <SafeAreaView style={styles.container}>
+      <ScrollView contentContainerStyle={{marginHorizontal:20,}}>
 
         <View style={styles.head}>
           <Text style={styles.headtxt1}>Your Balance</Text>
@@ -186,14 +191,14 @@ export default function Home({title,navigation}) {
             </View>
             <View style={styles.business_txt_view}>
               <Text style={styles.mange_txt}>Business Tip</Text>
-              <Text style={styles.bus_tip_txt}>Property label all transactions so content can give you insights to run your business</Text>
+              <Text style={styles.bus_tip_txt}>Property label all transactions so cantant can give you insights to run your business</Text>
             </View>
           </View>
         </View>
 
         <View style={styles.progess_view}>
-          <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
-            <Text style={styles.mange_txt}>Progress</Text>
+          <View style={{flexDirection:'row',alignItems:'center'}}>
+            <Text style={[styles.mange_txt,{flex:1}]}>Label your bank transactions</Text>
             <Text style={styles.progess_headtxt2}>0 Transaction</Text>
           </View>
           <ProgressBar  progress={0.1} color={colors.nextbtn} style={styles.progess_bar}/>
@@ -275,13 +280,16 @@ export default function Home({title,navigation}) {
           </Modal>
 
       </ScrollView>
+      </SafeAreaView>
       );
 }
 const styles = StyleSheet.create({
 
   container: {
     flex:1,
-    paddingHorizontal:windowWidth/20
+    // paddingHorizontal:20,
+    // marginHorizontal:20,
+    // backgroundColor:'red'
   },
   head:{
     flexDirection:'row',
@@ -382,14 +390,15 @@ const styles = StyleSheet.create({
   progess_headtxt2:{
     color:'#535353',
     fontSize:14,
-    fontWeight:'500'
+    fontWeight:'500',
+    marginLeft:10
   },
   cross_icon:{
     color: "#CCD4D6",
      fontSize: 20,
   },
   centeredView: {
-    flex: 1,
+    flex: 1, 
     justifyContent: "center",
     alignItems: "center",
     backgroundColor:'rgba(0, 0, 0, 0.6) '
@@ -504,6 +513,8 @@ const optionsStyles = {
     width:130,
     height:140,
     alignItems:'center',
+    marginTop:40,
+    borderRadius:5
   },
   optionsWrapper: {
     // backgroundColor: 'purple',

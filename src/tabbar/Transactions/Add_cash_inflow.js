@@ -238,7 +238,7 @@ import { Searchbar } from "react-native-paper";
   
     return (
           
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
           {Header()}
           
           <ScrollView style={styles.main_scroll_view}>
@@ -281,16 +281,17 @@ import { Searchbar } from "react-native-paper";
                 <AntDesign name="caretdown" size={12} color="#828282" />
             </TouchableOpacity>
 
+            <View style={{marginBottom:5,paddingHorizontal:windowWidth/20}}>
+              <Button_dark onpress={()=>{
+                navigation.reset({
+                  index: 0,
+                  routes: [{ name: 'Bottomtabbar' }],
+                })
+              }} Title1='Save' Title2='none' upper_margin={50}  fontsize={18}/>
+            </View>
           </ScrollView>
   
-          <View style={{justifyContent:'flex-end',marginBottom:5,paddingHorizontal:windowWidth/20}}>
-            <Button_dark onpress={()=>{
-              navigation.reset({
-                index: 0,
-                routes: [{ name: 'Bottomtabbar' }],
-              })
-            }} Title1='Save' Title2='none' upper_margin={5}  fontsize={18}/>
-          </View>
+
 
           <DateTimePickerModal
               isVisible={isDatePickerVisible}
@@ -319,7 +320,7 @@ import { Searchbar } from "react-native-paper";
             {sheet_state_data()}
         </RBSheet>
 
-        </View>
+        </SafeAreaView>
   
   
   

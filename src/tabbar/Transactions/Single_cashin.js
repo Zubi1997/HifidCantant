@@ -192,7 +192,7 @@ import { Credit_card_fill } from '../../../assets/svg_images';
     return(
       <View style={styles.head}>
         <View style={{flexDirection:'row',alignItems:'center'}}>
-          <TouchableOpacity style={{marginLeft:-10}}>
+          <TouchableOpacity onPress={()=>navigation.goBack()} style={{marginLeft:-10}}>
             <Entypo name={'chevron-small-left'} style={{alignSelf:'center'}} size={30} color={'white'} />
           </TouchableOpacity>
           <Text style={styles.head_txt1}>Your Transactions</Text>
@@ -217,7 +217,7 @@ import { Credit_card_fill } from '../../../assets/svg_images';
   
     return (
           
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
           {Header()}
           
           <ScrollView style={styles.main_scroll_view}>
@@ -295,7 +295,7 @@ import { Credit_card_fill } from '../../../assets/svg_images';
            {render_modal_view()}
           </Modal>
 
-        </View>
+        </SafeAreaView>
   
   
   

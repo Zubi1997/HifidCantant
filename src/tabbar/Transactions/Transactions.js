@@ -14,9 +14,10 @@ var windowHeight=Dimensions.get('window').height
 export default function Transactions({title,navigation,route}) {
 
     const [manual_time, set_manual_time] = useState('');
-    const toastRef = useRef();
     const [transaction_setup, set_transaction_setup] = useState(false);
     const [modal_visible_add_trans, set_modal_visible_add_trans] = useState(false);
+    const [selected_tab, set_selected_tab] = useState("All");
+    const scrollref=useRef()
 
     const catgry_type=route.params.cat_type
 
@@ -149,6 +150,9 @@ export default function Transactions({title,navigation,route}) {
     return(
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
+            <TouchableOpacity onPress={()=>set_modal_visible_add_trans(false)} style={{position:'absolute',top:10,right:10,height:40,width:30}}>
+              <Entypo name='cross' style={{fontSize:25,}}/>
+            </TouchableOpacity>
             <View style={styles.modal_logo_view}>
               <Text style={styles.blacktxt20}>Choose your transactions</Text>
             </View>
@@ -171,6 +175,22 @@ export default function Transactions({title,navigation,route}) {
     )
   }
 
+  const All_transactions=()=>{
+    return(
+      <View style={{width:windowWidth}}>
+        <ScrollView style={{paddingHorizontal:windowWidth/20,marginTop:20 }}>
+        
+          {cashInflow()}
+          {cashoutflow()}
+        </ScrollView>
+        
+        <View  style={{justifyContent:'flex-end',marginBottom:5,paddingHorizontal:windowWidth/20}}>
+          <Button_dark onpress={()=>set_modal_visible_add_trans(true)} Title1='Add Cash Transactions' Title2='none' upper_margin={5}  fontsize={18}/>
+        </View>
+      </View>
+    )
+    };
+
   return (
         
       <View style={styles.container}>
@@ -181,19 +201,46 @@ export default function Transactions({title,navigation,route}) {
             :
           <Text style={styles.head_txt2}>you don't have a transaction yet, please link your bank account with cantant</Text>
           }
+          <View style={styles.tab_header_main}>
+            <TouchableOpacity onPress={()=>{set_selected_tab('All'),scrollref.current.scrollTo({ x: windowWidth*0 })}} style={[styles.tab1,{backgroundColor:selected_tab=='All'?'white':colors.tab_head}]}>
+              <Text style={[styles.tab_txt,{color:selected_tab=='All'?'black':'white'}]}>All Transactions</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={()=>[set_selected_tab('Bank'),scrollref.current.scrollTo({ x: windowWidth*1 })]} style={[styles.tab1,{backgroundColor:selected_tab=='Bank'?'white':colors.tab_head}]}>
+              <Text style={[styles.tab_txt,{color:selected_tab=='Bank'?'black':'white'}]}>Bank</Text>
+            </TouchableOpacity>
           </View>
-        {transaction_setup==true?
-        <>
-        <ScrollView style={{paddingHorizontal:windowWidth/20,marginTop:20 }}>
-         
-          {cashInflow()}
-          {cashoutflow()}
-        </ScrollView>
-        
-        <View  style={{justifyContent:'flex-end',marginBottom:5,paddingHorizontal:windowWidth/20}}>
-          <Button_dark onpress={()=>set_modal_visible_add_trans(true)} Title1='Add Cash Transactions' Title2='none' upper_margin={5}  fontsize={18}/>
         </View>
-        </>
+        {transaction_setup==true?
+        <ScrollView showsHorizontalScrollIndicator={false} ref={scrollref} horizontal scrollEnabled={false} >
+          {All_transactions()}
+          {All_transactions()}
+        </ScrollView>
+        :
+        <ScrollView showsHorizontalScrollIndicator={false} ref={scrollref}  horizontal scrollEnabled={false} >
+                <View style={{width:windowWidth,height:'100%',justifyContent:'flex-end'}}>
+                  <View  style={{justifyContent:'flex-end',marginBottom:5,paddingHorizontal:windowWidth/20}}>
+                    <Button_dark onpress={()=> navigation.navigate('Link_acc_desc')} Title1='Link your bank account' Title2='none' upper_margin={5}  fontsize={18}/>
+                  </View>
+                </View>
+                <View style={{width:windowWidth,height:'100%',justifyContent:'flex-end'}}>
+                  <View  style={{justifyContent:'flex-end',marginBottom:5,paddingHorizontal:windowWidth/20}}>
+                    <Button_dark onpress={()=> navigation.navigate('Link_acc_desc')} Title1='Link your bank account' Title2='none' upper_margin={5}  fontsize={18}/>
+                  </View>
+                </View>
+        </ScrollView>
+        }
+        {/* {transaction_setup==true?
+        <View>
+          <ScrollView style={{paddingHorizontal:windowWidth/20,marginTop:20 }}>
+          
+            {cashInflow()}
+            {cashoutflow()}
+          </ScrollView>
+          
+          <View  style={{justifyContent:'flex-end',marginBottom:5,paddingHorizontal:windowWidth/20}}>
+            <Button_dark onpress={()=>set_modal_visible_add_trans(true)} Title1='Add Cash Transactions' Title2='none' upper_margin={5}  fontsize={18}/>
+          </View>
+        </View>
         :
         <>
         <View style={{flex:1}}></View>
@@ -201,7 +248,7 @@ export default function Transactions({title,navigation,route}) {
           <Button_dark onpress={()=> navigation.navigate('Link_acc_desc')} Title1='Link your bank account' Title2='none' upper_margin={5}  fontsize={18}/>
         </View>
         </>
-        }
+        } */}
 
           <Modal
             animationType="slide"
@@ -346,6 +393,25 @@ const styles = StyleSheet.create({
     color:'white',
     fontWeight:'600'
   },
+  tab_header_main:{
+    backgroundColor:colors.tab_head,
+    flexDirection:'row',
+    justifyContent:'space-between',
+    paddingVertical:5,
+    borderRadius:10,
+    marginTop:10
+  },
+  tab1:{
+    width:'50%',
+    height:35,
+    borderRadius:10,
+    alignItems:'center',
+    justifyContent:'center'
+  },
+  tab_txt:{
+    fontSize:14,
+    fontWeight:'500'
+  }
 
 });
 

@@ -37,12 +37,17 @@ export default function Pre_orders({route,navigation}) {
             
           />
           
-          <Button_dark onpress={()=> {
-            navigation.reset({
-              index: 0,
-              routes: [{name: 'Bottomtabbar'}],
-            });
-          }}  Title1='Save' Title2='none' upper_margin={windowHeight/10}  fontsize={18}/> 
+          <Button_dark 
+          // onpress={()=> {
+          //   navigation.reset({
+          //     index: 0,
+          //     routes: [{name: 'Bottomtabbar'}],
+          //   });
+          // }}
+          onpress={()=> {
+            navigation.navigate('Login');
+          }}
+            Title1='Save' Title2='none' upper_margin={windowHeight/10}  fontsize={18}/> 
 
 
       </ScrollView>
@@ -56,7 +61,7 @@ const styles = StyleSheet.create({
     container: {
         flex:1,
         // alignItems:'center',
-        paddingHorizontal:20
+        marginHorizontal:20
     },
     logo:{
         marginTop:windowHeight/10
